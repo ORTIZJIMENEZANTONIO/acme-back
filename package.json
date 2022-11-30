@@ -1,0 +1,28 @@
+{
+  "name": "acme-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ORTIZJIMENEZANTONIO/acme-back.git"
+  },
+  "author": "ORTIZJIMENEZANTONIO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ORTIZJIMENEZANTONIO/acme-back/issues"
+  },
+  "homepage": "https://github.com/ORTIZJIMENEZANTONIO/acme-back#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "typeorm": "^0.3.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
