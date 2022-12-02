@@ -115,7 +115,6 @@ const getRoutesMaxScore = (req, res) => {
   ];
   const maxRoutes = [];
 
-  console.time("pairIF");
   while (drivers.length != 0) {
     const maxSSUsers = [];
 
@@ -170,10 +169,7 @@ const getRoutesMaxScore = (req, res) => {
       places.splice(indexAddressToDlt, 1);
     }
   }
-  console.timeEnd("pairIF");
 
-  // console.log(event, lot, lvDeftPenalty);
-  console.table(maxRoutes);
   return res.json(maxRoutes);
 };
 
@@ -187,7 +183,7 @@ const getSS = (streetName, name) => {
   const nameLengthPair = nameLength % 2 == 0;
 
   if (streetNameLengthPair) {
-    const vowelQuantity = name.match(vowelRegex); // numero de vocales del nombre dl conductor
+    const vowelQuantity = name.match(vowelRegex);
     ss = vowelQuantity.length * 1.5;
   } else {
     const consonantuantity = name.match(consonantRegex);
@@ -200,6 +196,7 @@ const getSS = (streetName, name) => {
   ) {
     ss = ss * 1.5;
   }
+
   return ss;
 };
 
@@ -214,6 +211,7 @@ const getMaxCommonDivisor = (x, y) => {
 
   return x;
 };
+
 module.exports = {
   getRoutesMaxScore,
 };
