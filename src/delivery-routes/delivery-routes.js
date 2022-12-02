@@ -117,6 +117,17 @@ const getRoutesMaxScore = (req, res) => {
 
   while (drivers.length != 0) {
     const maxSSUsers = [];
+    const deleteAvailableRoute = (element) => {
+      maxRoutes.push(element);
+      const indexDriverToDlt = drivers.findIndex(
+        (el) => el.name == element.driver
+      );
+      const indexAddressToDlt = places.findIndex(
+        (el) => el.street == element.street
+      );
+      drivers.splice(indexDriverToDlt, 1);
+      places.splice(indexAddressToDlt, 1);
+    };
 
     drivers.map((driver) => {
       places.map((place, index) => {
@@ -146,31 +157,21 @@ const getRoutesMaxScore = (req, res) => {
 
     if (duplicates.length == 0) {
       maxSSUsers.map((user) => {
+        deleteAvailableRoute(user);
         maxRoutes.push(user);
-        const indexDriverToDlt = drivers.findIndex(
-          (el) => el.name == user.driver
-        );
-        const indexAddressToDlt = places.findIndex(
-          (el) => el.street == user.street
-        );
-        drivers.splice(indexDriverToDlt, 1);
-        places.splice(indexAddressToDlt, 1);
       });
     } else {
       duplicates.sort((a, b) => b.ss - a.ss);
-      maxRoutes.push(duplicates[0]);
-      const indexDriverToDlt = drivers.findIndex(
-        (el) => el.name == duplicates[0].driver
-      );
-      const indexAddressToDlt = places.findIndex(
-        (el) => el.street == duplicates[0].street
-      );
-      drivers.splice(indexDriverToDlt, 1);
-      places.splice(indexAddressToDlt, 1);
+      deleteAvailableRoute(duplicates[0]);
     }
   }
 
-  return res.json(maxRoutes);
+  const data = {
+    routes: maxRoutes,
+    total: maxRoutes.reduce((carry, el) => carry + el.ss, 0),
+  };
+
+  return res.json(data);
 };
 
 const getSS = (streetName, name) => {
