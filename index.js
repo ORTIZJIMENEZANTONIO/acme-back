@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
+const deliveryRoutes = require("./src/delivery-routes/delivery-routes");
+
 // Variables
 const port = process.env.PORT || 3000;
 
@@ -19,11 +21,20 @@ app.use(bodyParser.json());
 
 // app.use();
 // Routes
-app.get("/", (req, res) =>
-  res.json({
+app.get("/", (req, res) => {
+  con
+    .authenticate()
+    .then((result) => console.log(result))
+    .catch((err) => console.error(err));
+
+  return res.json({
     message: "Welcome to acme back",
-  })
-);
+  });
+});
+
+const { con } = require("./db-conection/db-conection");
+
+app.get("/routes", deliveryRoutes.getRoutesMaxScore);
 
 app.listen(port, () => console.log(`Running in port: ${port}`));
 
