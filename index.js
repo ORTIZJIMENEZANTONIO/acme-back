@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
+const deliveryRoutes = require("./src/delivery-routes/delivery-routes");
+
 // Variables
 const port = process.env.PORT || 3000;
 
@@ -24,6 +26,8 @@ app.get("/", (req, res) =>
     message: "Welcome to acme back",
   })
 );
+
+app.get("/routes", deliveryRoutes.getRoutesMaxScore);
 
 app.listen(port, () => console.log(`Running in port: ${port}`));
 
