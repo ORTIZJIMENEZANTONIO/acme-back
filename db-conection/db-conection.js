@@ -1,16 +1,14 @@
-const mysql = require("mysql");
+const { Sequelize } = require("sequelize");
 
 const getDatabase = () => process.env.MYSQL_DATABASE || "delivery";
 const getUser = () => process.env.MYSQL_USER || "root";
 const getPass = () => process.env.MYSQL_PASSWORD || "root";
-const getHost = () => process.env.MYSQL_HOST || "localhot";
+const getHost = () => process.env.MYSQL_HOST || "localhost";
 
-const con = mysql.createPool({
+const con = new Sequelize(getDatabase(), getUser(), getPass(), {
   connectionLimit: 10,
   host: getHost(),
-  user: getUser(),
-  password: getPass(),
-  database: getDatabase(),
+  dialect: "mysql",
 });
 
 module.exports = { con };

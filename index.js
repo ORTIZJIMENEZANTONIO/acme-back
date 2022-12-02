@@ -21,11 +21,18 @@ app.use(bodyParser.json());
 
 // app.use();
 // Routes
-app.get("/", (req, res) =>
-  res.json({
+app.get("/", (req, res) => {
+  con
+    .authenticate()
+    .then((result) => console.log(result))
+    .catch((err) => console.error(err));
+
+  return res.json({
     message: "Welcome to acme back",
-  })
-);
+  });
+});
+
+const { con } = require("./db-conection/db-conection");
 
 app.get("/routes", deliveryRoutes.getRoutesMaxScore);
 
