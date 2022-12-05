@@ -115,7 +115,7 @@ const getRoutesMaxScore = (req, res) => {
   ];
   const maxRoutes = [];
 
-  while (drivers.length != 0) {
+  while (drivers.length != 0 && places.length != 0) {
     const maxSSUsers = [];
     const deleteAvailableRoute = (element) => {
       maxRoutes.push(element);
@@ -201,8 +201,10 @@ const getSS = (streetName, name) => {
   return ss;
 };
 
-const getMaxCommonDivisor = (x, y) => {
+const getMaxCommonDivisor = (a, b) => {
   let z;
+  let x = a > b ? a : b;
+  let y = a < b ? a : b;
 
   while (y) {
     z = y;
