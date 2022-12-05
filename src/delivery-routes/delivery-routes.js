@@ -201,8 +201,10 @@ const getSS = (streetName, name) => {
   return ss;
 };
 
-const getMaxCommonDivisor = (x, y) => {
+const getMaxCommonDivisor = (a, b) => {
   let z;
+  let x = a > b ? a : b;
+  let y = a < b ? a : b;
 
   while (y) {
     z = y;

@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "3235b81b-602d-4fba-af42-bb73a6e5f7c5",
+		"name": "acme-back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6419147"
+	},
+	"item": [
+		{
+			"name": "main",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}",
+					"host": [
+						"{{base}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRoutes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}/routes",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"routes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "localhost:3000"
+		}
+	]
+}
