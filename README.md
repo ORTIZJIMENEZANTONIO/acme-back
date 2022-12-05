@@ -9,7 +9,7 @@
 - Run in command line "npm run dev"
 - The project will be run in port 3000
 
-## Oprtional
+## Optional
 - In "docs" folder can use the collection in postman to check the url test
 
 ### Notes:
