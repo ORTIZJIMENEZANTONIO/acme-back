@@ -19,22 +19,14 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 
-// app.use();
 // Routes
 app.get("/", (req, res) => {
-  con
-    .authenticate()
-    .then((result) => console.log(result))
-    .catch((err) => console.error(err));
-
   return res.json({
     message: "Welcome to acme back",
   });
 });
 
-const { con } = require("./db-conection/db-conection");
-
-app.get("/routes", deliveryRoutes.getRoutesMaxScore);
+app.post("/routes", deliveryRoutes.getRoutesMaxScore);
 
 app.listen(port, () => console.log(`Running in port: ${port}`));
 

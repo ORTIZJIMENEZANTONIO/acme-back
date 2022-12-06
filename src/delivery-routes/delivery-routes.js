@@ -1,118 +1,34 @@
+/*
+IN: {
+  drivers: [
+    {
+      "name": String,
+      "routes": []
+    }
+  ],
+  places: [ 
+    {
+      "street": String,
+      "city": String,
+      "state": String,
+      "phoneNumber": String,
+      "zipCode": Number
+    }
+  ]
+}
+OUT: {
+  "routes": [
+    {
+      "street": String,
+      "driver": String,
+      "ss": Number
+    }
+  ],
+  "total": Number
+}
+*/
 const getRoutesMaxScore = (req, res) => {
-  const drivers = [
-    {
-      name: "James Lewis",
-      routes: [],
-    },
-    {
-      name: "Paul Gutierrez",
-      routes: [],
-    },
-    {
-      name: "Jack Brown",
-      routes: [],
-    },
-    {
-      name: "Amy Jones",
-      routes: [],
-    },
-    {
-      name: "Linda Henderson",
-      routes: [],
-    },
-    {
-      name: "Mitchell Huynh",
-      routes: [],
-    },
-    {
-      name: "Jacqueline Sandoval",
-      routes: [],
-    },
-    {
-      name: "Brandon Marshall",
-      routes: [],
-    },
-    {
-      name: "Albert Smith",
-      routes: [],
-    },
-    {
-      name: "Abigail Castillo DDS",
-      routes: [],
-    },
-  ];
-  const places = [
-    {
-      street: "4889 Yorkie Lane",
-      city: "Climax",
-      state: "Michigan",
-      phoneNumber: "912-871-4199",
-      zipCode: 49034,
-    },
-    {
-      street: "492 Skips Lane",
-      city: "Casa",
-      state: "Arkansas",
-      phoneNumber: "928-530-8895",
-      zipCode: 72025,
-    },
-    {
-      street: "1596 Cantebury Drive",
-      city: "Mineola",
-      state: "New York",
-      phoneNumber: "646-584-5030",
-      zipCode: 11501,
-    },
-    {
-      street: "4313 Michael Street",
-      city: "Houston",
-      state: "Texas",
-      phoneNumber: "713-800-4735",
-      zipCode: 77002,
-    },
-    {
-      street: "2928 Deer Haven Drive",
-      city: "Sterling",
-      state: "Michigan",
-      phoneNumber: "864-314-4183",
-      zipCode: 48659,
-    },
-    {
-      street: "4787 Strother Street",
-      city: "Birmingham",
-      state: "Alabama",
-      phoneNumber: "205-585-5085",
-      zipCode: 35203,
-    },
-    {
-      street: "3102 Hillhaven Drive",
-      city: "Los Angeles",
-      state: "California",
-      phoneNumber: "323-921-8567",
-      zipCode: 90071,
-    },
-    {
-      street: "1151 Sampson Street",
-      city: "Denver",
-      state: "Colorado",
-      phoneNumber: "303-615-4879",
-      zipCode: 80202,
-    },
-    {
-      street: "4622 Oliver Street",
-      city: "Plano",
-      state: "Texas",
-      phoneNumber: "817-363-6314",
-      zipCode: 75074,
-    },
-    {
-      street: "195 Hamilton Drive",
-      city: "Port Arthur",
-      state: "Texas",
-      phoneNumber: "409-989-0696",
-      zipCode: 77640,
-    },
-  ];
+  const { drivers, places } = req.body;
   const maxRoutes = [];
 
   while (drivers.length != 0 && places.length != 0) {
@@ -174,20 +90,29 @@ const getRoutesMaxScore = (req, res) => {
   return res.json(data);
 };
 
-const getSS = (streetName, name) => {
+/*
+IN: 
+  streetName: String,
+  driverName: String
+
+OUT:
+  ss: Number
+*/
+const getSS = (streetName, driverName) => {
   let ss = 0;
   const vowelRegex = /[aeiou]/gi;
   const consonantRegex = /[^aeiou ]/gi;
-  const nameLength = name.length;
-  const streetNameLength = streetName.length;
+  const alphabetRegex = /[a-z]/gi;
+  const nameLength = driverName.match(alphabetRegex).length;
+  const streetNameLength = streetName.match(alphabetRegex).length;
   const streetNameLengthPair = streetNameLength % 2 == 0;
   const nameLengthPair = nameLength % 2 == 0;
 
   if (streetNameLengthPair) {
-    const vowelQuantity = name.match(vowelRegex);
+    const vowelQuantity = driverName.match(vowelRegex);
     ss = vowelQuantity.length * 1.5;
   } else {
-    const consonantuantity = name.match(consonantRegex);
+    const consonantuantity = driverName.match(consonantRegex);
     ss = consonantuantity.length;
   }
 
@@ -201,6 +126,14 @@ const getSS = (streetName, name) => {
   return ss;
 };
 
+/*
+IN: 
+  a: Number,
+  b: Number
+
+OUT:
+  c: Number
+*/
 const getMaxCommonDivisor = (a, b) => {
   let z;
   let x = a > b ? a : b;
